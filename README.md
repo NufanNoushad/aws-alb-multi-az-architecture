@@ -1,6 +1,6 @@
 # aws-alb-multi-az-architecture
 
-<img width="1024" height="823" alt="alb-aws-diagram drawio" src="https://github.com/user-attachments/assets/60cc263d-8793-4d4e-8891-a56e326afa44" />
+<img width="1024" height="823" alt="alb-aws-diagram drawio" src="https://github.com/user-attachments/assets/569bfbb9-8750-428c-927e-acaa54f08752" />
 
 ---
 
