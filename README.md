@@ -1,5 +1,5 @@
 # aws-alb-multi-az-architecture
-This project demonstrates a highly available AWS web architecture using an Application Load Balancer, multi-AZ networking, private EC2 instances, and controlled outbound access via a NAT Gateway. The goal is to showcase secure, production-style AWS networking fundamentals and validation of fault tolerance.
+Designed and implemented a highly available AWS web architecture leveraging an Application Load Balancer, multi-AZ VPC networking, and private EC2 instances with controlled outbound access via a NAT Gateway. The system enforces least-privilege networking, isolates public and private tiers, and validates fault tolerance through multi-Availability Zone deployment and failure testing. This project demonstrates production-style AWS networking fundamentals, security boundaries, and operational resilience.
 
 <img width="1075" height="864" alt="AWS Multi-AZ Architecture drawio" src="https://github.com/user-attachments/assets/019b75fa-8112-460e-abb7-5354df82334d" />
 
