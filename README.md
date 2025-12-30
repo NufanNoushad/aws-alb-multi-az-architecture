@@ -17,7 +17,7 @@ Select a single AWS region to ensure consistent resource placement and Availabil
 
 ### Evidence
 
-<img width="252" height="415" alt="00-region-selection" src="https://github.com/user-attachments/assets/f80aeda3-2d2e-463e-a241-d6eb06a20f43" />
+<img width="252" height="415" alt="00-region-selection" src="./screenshots/00-region-selection.png" />
 
 ---
 
@@ -40,7 +40,7 @@ Create an isolated network boundary to host all application resources.
 
 ### Evidence
 
-<img width="1920" height="1860" alt="01-vpc-creation-details" src="https://github.com/user-attachments/assets/5a8679db-967a-4ca2-a702-999c5fa7f9f6" />
+<img width="1920" height="1860" alt="01-vpc-creation-details" src="./screenshots/01-vpc-creation-details.png" />
 
 ---
 
@@ -63,7 +63,7 @@ Create public subnets to host internet-facing components such as the Application
 
 ### Evidence
 
-<img width="868" height="79" alt="03-public-subnets" src="https://github.com/user-attachments/assets/4623d2ba-f491-413e-8a1f-8dd0cf4d4278" />
+<img width="868" height="79" alt="03-public-subnets" src="./screenshots/03-public-subnets.png" />
 
 ---
 
@@ -86,7 +86,7 @@ Create isolated subnets for application instances that should not be directly ac
 
 ### Evidence
 
-<img width="866" height="80" alt="04-all-subnets" src="https://github.com/user-attachments/assets/d0ba8a08-ba9b-40bc-8ba9-a2667f2ea3e5" />
+<img width="866" height="80" alt="04-all-subnets" src="./screenshots/04-all-subnets.png" />
 
 ---
 
@@ -107,7 +107,7 @@ Enable outbound and inbound internet connectivity for public subnets.
 
 ### Evidence
 
-<img width="812" height="87" alt="05-igw-attached" src="https://github.com/user-attachments/assets/5d32b906-4b6e-4bc7-965d-5dad6e702ee5" />
+<img width="812" height="87" alt="05-igw-attached" src="./screenshots/05-igw-attached.png" />
 
 ---
 
@@ -120,7 +120,6 @@ Allow public subnets to reach the internet via the Internet Gateway.
 ### What was configured
 
 * Route table with:
-
   * `0.0.0.0/0 → Internet Gateway`
 * Associated with both public subnets
 
@@ -131,7 +130,7 @@ Allow public subnets to reach the internet via the Internet Gateway.
 
 ### Evidence
 
-<img width="1920" height="949" alt="06-rt-public-routes" src="https://github.com/user-attachments/assets/ac233e6e-689f-48d5-85f1-c4cd7c764634" />
+<img width="1920" height="949" alt="06-rt-public-routes" src="./screenshots/06-rt-public-routes.png" />
 
 ---
 
@@ -154,7 +153,7 @@ Enable private subnets to access the internet without exposing inbound access.
 
 ### Evidence
 
-<img width="1920" height="947" alt="09-rt-private-routes" src="https://github.com/user-attachments/assets/6d009c22-2e2e-4a3b-9e07-23f33e517e8b" />
+<img width="1920" height="947" alt="09-rt-private-routes" src="./screenshots/09-rt-private-routes.png" />
 
 ---
 
@@ -176,7 +175,7 @@ Provide a static public IP address for the NAT Gateway.
 
 ### Evidence
 
-<img width="1920" height="1488" alt="10-elastic-ip" src="https://github.com/user-attachments/assets/72749205-c91e-4169-9f5a-703e7446571b" />
+<img width="1920" height="1488" alt="10-elastic-ip" src="./screenshots/10-elastic-ip.png" />
 
 ---
 
@@ -200,7 +199,7 @@ Allow EC2 instances in private subnets to access the internet for outbound traff
 
 ### Evidence
 
-<img width="1920" alt="11-nat-gateway" src="screenshots/11-nat-gateway.png" />
+<img width="1920" alt="11-nat-gateway" src="./screenshots/11-nat-gateway.png" />
 
 ---
 
@@ -213,7 +212,6 @@ Route outbound internet traffic from private subnets through the NAT Gateway.
 ### What was configured
 
 * Private route table updated with:
-
   * `0.0.0.0/0 → NAT Gateway`
 * Route table associated with both private subnets
 
@@ -225,7 +223,7 @@ Route outbound internet traffic from private subnets through the NAT Gateway.
 
 ### Evidence
 
-<img width="1920" alt="12-private-rt-nat-route" src="screenshots/12-private-rt-nat-route.png" />
+<img width="1920" alt="12-private-rt-nat-route" src="./screenshots/12-private-rt-nat-route.png" />
 
 ---
 
@@ -238,11 +236,9 @@ Control inbound and outbound traffic for the internet-facing Application Load Ba
 ### What was configured
 
 **Inbound**
-
 * HTTP (port 80) from `0.0.0.0/0`
 
 **Outbound**
-
 * All traffic allowed
 
 ### Why this matters
@@ -252,7 +248,7 @@ Control inbound and outbound traffic for the internet-facing Application Load Ba
 
 ### Evidence
 
-<img width="1920" alt="13-alb-sg-inbound" src="screenshots/13-alb-sg-inbound.png" />
+<img width="1920" alt="13-alb-sg-inbound" src="./screenshots/13-alb-sg-inbound.png" />
 
 ---
 
@@ -265,11 +261,9 @@ Restrict inbound access to EC2 instances so they can only receive traffic from t
 ### What was configured
 
 **Inbound**
-
 * HTTP (port 80) only from the ALB security group
 
 **Outbound**
-
 * All traffic allowed
 
 ### Why this matters
@@ -280,7 +274,7 @@ Restrict inbound access to EC2 instances so they can only receive traffic from t
 
 ### Evidence
 
-<img width="1920" alt="15-ec2-sg-rules" src="screenshots/15-ec2-sg-rules.png" />
+<img width="1920" alt="15-ec2-sg-rules" src="./screenshots/15-ec2-sg-rules.png" />
 
 ---
 
@@ -293,7 +287,6 @@ Deploy application servers in isolated private subnets across multiple Availabil
 ### What was configured
 
 * Two EC2 instances launched:
-
   * One in **AZ-a**
   * One in **AZ-b**
 * No public IP addresses assigned
@@ -308,8 +301,8 @@ Deploy application servers in isolated private subnets across multiple Availabil
 
 ### Evidence
 
-<img width="1920" alt="17-ec2-web-a-details" src="screenshots/17-ec2-web-a-details.png" />
-<img width="1920" alt="18-ec2-web-b-details" src="screenshots/18-ec2-web-b-details.png" />
+<img width="1920" alt="17-ec2-web-a-details" src="./screenshots/17-ec2-web-a-details.png" />
+<img width="1920" alt="18-ec2-web-b-details" src="./screenshots/18-ec2-web-b-details.png" />
 
 ---
 
@@ -335,7 +328,7 @@ Group EC2 instances behind the Application Load Balancer for traffic routing and
 
 ### Evidence
 
-<img width="1920" alt="19-target-group-details" src="screenshots/19-target-group-details.png" />
+<img width="1920" alt="19-target-group-details" src="./screenshots/19-target-group-details.png" />
 
 ---
 
@@ -360,7 +353,7 @@ Provide a single, highly available entry point for inbound web traffic.
 
 ### Evidence
 
-<img width="1920" alt="21-alb-config-overview" src="screenshots/21-alb-config-overview.png" />
+<img width="1920" alt="21-alb-config-overview" src="./screenshots/21-alb-config-overview.png" />
 
 ---
 
@@ -378,8 +371,7 @@ Verify that load balancing and high availability are functioning correctly.
 
 ### Evidence
 
-* `final-validation-recording.mp4`
-* `web-server-response.mp4`
-* EC2 instance status list
+* [Final validation recording](./screenshots/final-validation-recording.mp4)
+* [Web server response demo](./screenshots/web-server-responses.mp4)
 
-<img width="1920" alt="ec2-instances-list" src="screenshots/ec2-instances-list.png" />
+<img width="1920" alt="ec2-instances-list" src="./screenshots/ec2-instances-list.png" />
