@@ -16,8 +16,6 @@ Select a single AWS region to ensure consistent resource placement and Availabil
 * AWS Region set to **Europe (London) – eu-west-2**
 * This region provides multiple Availability Zones required for high availability
 
-### Evidence
-
 <img width="252" height="415" alt="00-region-selection" src="./aws-alb-multi-az-architecture/screenshots/00-region-selection.png" />
 
 ---
@@ -38,8 +36,6 @@ Create an isolated network boundary to host all application resources.
 
 * A `/16` CIDR provides sufficient address space for subnet segmentation
 * Establishes full control over networking and routing
-
-### Evidence
 
 <img width="1920" height="1860" alt="01-vpc-creation-details" src="./aws-alb-multi-az-architecture/screenshots/01-vpc-creation-details.png" />
 
@@ -62,8 +58,6 @@ Create public subnets to host internet-facing components such as the Application
 * Enables high availability across Availability Zones
 * Required for ALB and NAT Gateway placement
 
-### Evidence
-
 <img width="868" height="79" alt="03-public-subnets" src="./aws-alb-multi-az-architecture/screenshots/03-public-subnets.png" />
 
 ---
@@ -85,8 +79,6 @@ Create isolated subnets for application instances that should not be directly ac
 * Enforces network isolation
 * Reduces attack surface by preventing direct inbound internet access
 
-### Evidence
-
 <img width="866" height="80" alt="04-all-subnets" src="./aws-alb-multi-az-architecture/screenshots/04-all-subnets.png" />
 
 ---
@@ -105,8 +97,6 @@ Enable outbound and inbound internet connectivity for public subnets.
 
 * Required for public subnets to route traffic to and from the internet
 * Enables ALB ingress and NAT Gateway egress
-
-### Evidence
 
 <img width="812" height="87" alt="05-igw-attached" src="./aws-alb-multi-az-architecture/screenshots/05-igw-attached.png" />
 
@@ -129,8 +119,6 @@ Allow public subnets to reach the internet via the Internet Gateway.
 * Makes the subnets truly public
 * Required for ALB accessibility
 
-### Evidence
-
 <img width="1920" height="949" alt="06-rt-public-routes" src="./aws-alb-multi-az-architecture/screenshots/06-rt-public-routes.png" />
 
 ---
@@ -152,8 +140,6 @@ Enable private subnets to access the internet without exposing inbound access.
 * Maintains private subnet isolation
 * Enables controlled outbound connectivity
 
-### Evidence
-
 <img width="1920" height="947" alt="09-rt-private-routes" src="./aws-alb-multi-az-architecture/screenshots/09-rt-private-routes.png" />
 
 ---
@@ -173,8 +159,6 @@ Provide a static public IP address for the NAT Gateway.
 
 * NAT Gateway requires an Elastic IP for outbound internet access
 * Allows private instances to download updates securely
-
-### Evidence
 
 <img width="1920" height="1488" alt="10-elastic-ip" src="./aws-alb-multi-az-architecture/screenshots/10-elastic-ip.png" />
 
@@ -198,8 +182,6 @@ Allow EC2 instances in private subnets to access the internet for outbound traff
 * Preserves inbound isolation while allowing outbound connectivity
 * Follows AWS best practices for private subnet internet access
 
-### Evidence
-
 <img width="1920" alt="11-nat-gateway" src="./aws-alb-multi-az-architecture/screenshots/11-nat-gateway.png" />
 
 ---
@@ -221,8 +203,6 @@ Route outbound internet traffic from private subnets through the NAT Gateway.
 * Prevents direct internet exposure
 * Ensures all outbound traffic is controlled and auditable
 * Completes the private subnet egress path
-
-### Evidence
 
 <img width="1920" alt="12-private-rt-nat-route" src="./aws-alb-multi-az-architecture/screenshots/12-private-rt-nat-route.png" />
 
@@ -247,8 +227,6 @@ Control inbound and outbound traffic for the internet-facing Application Load Ba
 * ALB must be publicly accessible to receive client requests
 * Security group acts as the first layer of traffic control
 
-### Evidence
-
 <img width="1920" alt="13-alb-sg-inbound" src="./aws-alb-multi-az-architecture/screenshots/13-alb-sg-inbound.png" />
 
 ---
@@ -272,8 +250,6 @@ Restrict inbound access to EC2 instances so they can only receive traffic from t
 * Prevents direct internet access to EC2 instances
 * Enforces identity-based access instead of IP-based rules
 * Improves overall security posture
-
-### Evidence
 
 <img width="1920" alt="15-ec2-sg-rules" src="./aws-alb-multi-az-architecture/screenshots/15-ec2-sg-rules.png" />
 
@@ -300,8 +276,6 @@ Deploy application servers in isolated private subnets across multiple Availabil
 * Enables load balancing validation
 * Ensures the compute layer is not publicly exposed
 
-### Evidence
-
 <img width="1920" alt="17-ec2-web-a-details" src="./aws-alb-multi-az-architecture/screenshots/17-ec2-web-a-details.png" />
 <img width="1920" alt="18-ec2-web-b-details" src="./aws-alb-multi-az-architecture/screenshots/18-ec2-web-b-details.png" />
 
@@ -327,8 +301,6 @@ Group EC2 instances behind the Application Load Balancer for traffic routing and
 * Abstracts compute resources behind a single endpoint
 * Supports automatic failover
 
-### Evidence
-
 <img width="1920" alt="19-target-group-details" src="./aws-alb-multi-az-architecture/screenshots/19-target-group-details.png" />
 
 ---
@@ -352,8 +324,6 @@ Provide a single, highly available entry point for inbound web traffic.
 * Distributes traffic evenly across instances
 * Enables health-based routing
 
-### Evidence
-
 <img width="1920" alt="21-alb-config-overview" src="./aws-alb-multi-az-architecture/screenshots/21-alb-config-overview.png" />
 
 ---
@@ -369,8 +339,6 @@ Verify that load balancing and high availability are functioning correctly.
 * Refreshing the ALB DNS endpoint alternates responses between EC2 instances
 * Terminating one EC2 instance does not cause downtime
 * Target group health checks update automatically
-
-### Evidence
 
 * [Final validation recording](./aws-alb-multi-az-architecture/screenshots/final-validation-recording.mp4)
 * [Web server response demo](./aws-alb-multi-az-architecture/screenshots/web-server-responses.mp4)
